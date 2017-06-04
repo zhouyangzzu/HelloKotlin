@@ -31,14 +31,12 @@ class MyPageAdapter (var mContext:Context): PagerAdapter(){
         }
 
         var layout : LinearLayout = LayoutInflater.from(mContext).inflate(layoutId, null) as LinearLayout
-        if (container != null)
-            container.addView(layout)
+        container!!.addView(layout)
 
         return layout
     }
 
     override fun destroyItem(container: ViewGroup?, position: Int, `object`: Any?) {
-        if (container != null)
-            container.removeView(`object` as View)
+        container!!.removeView(`object` as View)
     }
 }
