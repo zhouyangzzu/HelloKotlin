@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.zhouyangzzu.hellokotlin.MainActivity">
+    tools:context="com.example.zhouyangzzu.hellokotlin.MainActivity"
+    android:keepScreenOn="true"
+    >
 
     <com.tmall.ultraviewpager.UltraViewPager
         android:id="@+id/ultra_viewpager"
