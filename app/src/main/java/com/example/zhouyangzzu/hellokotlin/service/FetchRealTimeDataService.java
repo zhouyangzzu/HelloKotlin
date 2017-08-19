@@ -36,6 +36,11 @@ public class FetchRealTimeDataService extends IntentService {
     }
 
     @Override
+    public int onStartCommand(@Nullable Intent intent, int flags, int startId) {
+        return IntentService.START_STICKY;//保活
+    }
+
+    @Override
     protected void onHandleIntent(@Nullable Intent intent) {
 
     }
