@@ -26,7 +26,7 @@ public class FetchRealTimeDataService extends IntentService {
     @Override
     public void onCreate() {
         super.onCreate();
-        addTask();
+        addTask(this);
     }
 
     @Nullable
@@ -45,16 +45,19 @@ public class FetchRealTimeDataService extends IntentService {
 
     }
 
-    private void addTask(){
+    static public void addTask(Context context){
 
         long triggerAtTime = SystemClock.elapsedRealtime() + 1000;//1s之后触发
         long interval = 1000;//每秒取一次数据
-        Intent intent = new Intent(this, AlarmReceiver.class);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, 0,
+        Intent intent = new Intent(context, AlarmReceiver.class);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0,
                 intent, PendingIntent.FLAG_UPDATE_CURRENT);
 
-        AlarmManager manager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
-        manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, interval, pendingIntent);
+        AlarmManager manager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+        //manager.setRepeating(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, interval, pendingIntent);
+
+        //换单次alarm，试试保活效果
+        manager.set(AlarmManager.ELAPSED_REALTIME_WAKEUP, triggerAtTime, pendingIntent);
     }
 
 

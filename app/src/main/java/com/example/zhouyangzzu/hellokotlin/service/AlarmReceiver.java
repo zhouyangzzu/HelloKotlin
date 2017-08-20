@@ -14,10 +14,14 @@ import java.util.Locale;
 public class AlarmReceiver extends BroadcastReceiver {
 
     static TextToSpeech textToSpeech = null;
+    static int count = 0;
 
 
     @Override
     public void onReceive(Context context, Intent intent) {
+
+        //启动下一次任务
+        FetchRealTimeDataService.addTask(context);
 
         try{
             if (null == textToSpeech){
@@ -28,8 +32,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                     }
                 });
             }else{
-                textToSpeech.speak("EOS rise 5%", TextToSpeech.QUEUE_FLUSH, null);
-
+                count++;
+                textToSpeech.speak(""+count, TextToSpeech.QUEUE_FLUSH, null);
             }
         }catch (Exception e){
             e.printStackTrace();
